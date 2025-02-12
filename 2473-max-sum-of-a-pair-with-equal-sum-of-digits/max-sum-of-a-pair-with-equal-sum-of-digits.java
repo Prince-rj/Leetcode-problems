@@ -1,20 +1,16 @@
 class Solution {
     public int maximumSum(int[] nums) {
-        HashMap<Long,PriorityQueue<Integer>> hm=new HashMap<>();
+        HashMap<Long,Integer> hm=new HashMap<>();
+        int ans=-1;
         for(int i=0;i<nums.length;i++){
             long x=sumOfDig(nums[i]);
-            if(!hm.containsKey(x))hm.put(x,new PriorityQueue<>(Collections.reverseOrder()));
-            hm.get(x).add(nums[i]);
+            if(!hm.containsKey(x))hm.put(x,nums[i]);
+            else{
+                ans=Math.max(ans,hm.get(x)+nums[i]);
+                hm.put(x,Math.max(nums[i],hm.get(x)));
+            }
         }
-        int ans=0;
-        for(var i:hm.entrySet()){
-            int a=0,b=0;
-            a=i.getValue().poll();
-            if(i.getValue().isEmpty())continue;
-            else b=i.getValue().poll();
-            ans=Math.max(ans,a+b);
-        }
-        return (ans==0)?-1:ans;
+        return ans;
     }
     public long sumOfDig(int n){
         long s=0;
