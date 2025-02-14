@@ -1,22 +1,35 @@
 class ProductOfNumbers {
     ArrayList<Integer> arr;
+    ArrayList<Integer> zeros;
     int product;
-    int v=0;
     public ProductOfNumbers() {
         arr=new ArrayList<>();
+        zeros=new ArrayList<>();
         product=1;
     }
     
     public void add(int num) {
-        arr.add(num);
+        if(num!=0){
+            product=product*num;
+            arr.add(product);
+        }
+        else{
+            product=1;
+            arr.add(0);
+            zeros.add(arr.size()-1);
+        } 
     }
     
     public int getProduct(int k) {
-        int val=1;
-        for(int i=arr.size()-1;i>=arr.size()-k;i--){
-            val*=arr.get(i);
+        int val=arr.size()-k-1;
+        // System.out.println(arr);
+        // System.out.println(zeros);
+        for(var i=zeros.size()-1;i>=0;i--){
+            if(zeros.get(i)>val)return 0;
+            else if(zeros.get(i)<k)break;
         }
-        return val;
+        if(val==-1||arr.get(val)==0)return product;
+        return product/arr.get(val);
     }
 }
 
