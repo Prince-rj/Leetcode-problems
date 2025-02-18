@@ -12,13 +12,13 @@ class MedianFinder {
         size++;
         if(!min.isEmpty()&&num>min.peek()){
             min.add(num);
-            while(min.size()>size/2){
+            if(min.size()>size/2){
                 max.add(min.poll());
             }
         }
         else{
             max.add(num);
-            while(max.size()>size/2){
+            if(max.size()>size/2){
                 min.add(max.poll());
             }
         }
