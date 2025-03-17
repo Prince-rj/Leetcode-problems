@@ -6,16 +6,19 @@ class Solution {
             if(ratings[i-1]<ratings[i])r[i]=r[i-1]+1;
             else r[i]=1;
         }
-        int s[]=new int[ratings.length];
-        s[ratings.length-1]=1;
-        for(int i=ratings.length-2;i>=0;i--){
-            if(ratings[i+1]<ratings[i])s[i]=s[i+1]+1;
-            else s[i]=1;
-        }
         int ans=0;
-        for(var i=0;i<ratings.length;i++){
-            ans+=Math.max(s[i],r[i]);
+        int v=1;
+        for(int i=ratings.length-2;i>=0;i--){
+            if(ratings[i+1]<ratings[i]){
+                v=v+1;
+                ans+=Math.max(v,r[i]);
+            }
+            else{
+                v=1;
+                ans+=Math.max(v,r[i]);
+            } 
         }
+        ans+=Math.max(1,r[ratings.length-1]);
         return ans;
     }
 }
