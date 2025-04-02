@@ -15,28 +15,15 @@
  */
 class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
-        HashMap<TreeNode, Integer> hm=new HashMap<>();
-        return diam(root,hm);
+        int arr[]={0};
+        help(root,arr);
+        return arr[0];
     }
-    public int diam(TreeNode root,HashMap<TreeNode,Integer> hm){
+    public int help(TreeNode root,int[] arr){
         if(root==null)return 0;
-        int x=0;
-        int y=0;
-        if(!hm.containsKey(root.left))x=help(root.left,hm);
-        else x=hm.get(root.left);
-        if(!hm.containsKey(root.right))y=help(root.right,hm);
-        else y=hm.get(root.right);
-        int curr=x+y;
-        int l=diam(root.left,hm);
-        int r=diam(root.right,hm);
-        return Math.max(curr,Math.max(l,r));
-    }
-    public int help(TreeNode root,HashMap<TreeNode,Integer> hm){
-        if(root==null)return 0;
-        int l=help(root.left,hm);
-        int r=help(root.right,hm);
-        int v=1+Math.max(l,r);
-        hm.put(root,v);
-        return v;
+        int l=help(root.left,arr);
+        int r=help(root.right,arr);
+        arr[0]=Math.max(l+r,arr[0]);
+        return 1+Math.max(l,r);
     }
 }
