@@ -22,10 +22,10 @@ class Solution {
         if(root==null)return 0;
         int x=0;
         int y=0;
-        if(!hm.containsKey(x))x=help(root.left,hm);
+        if(!hm.containsKey(root.left))x=help(root.left,hm);
         else x=hm.get(root.left);
-        if(!hm.containsKey(y))y=help(root.right,hm);
-        else x=hm.get(root.right);
+        if(!hm.containsKey(root.right))y=help(root.right,hm);
+        else y=hm.get(root.right);
         int curr=x+y;
         int l=diam(root.left,hm);
         int r=diam(root.right,hm);
