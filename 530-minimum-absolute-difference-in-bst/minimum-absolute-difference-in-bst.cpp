@@ -21,7 +21,7 @@ public:
         if(root==NULL)return;
         help(root->left,ans,prev);
         ans=min(ans,abs(root->val-prev));
-        cout<<prev<<" "<<root->val<<endl;
+        // cout<<prev<<" "<<root->val<<endl;
         prev=root->val;
         help(root->right,ans,prev);
 
